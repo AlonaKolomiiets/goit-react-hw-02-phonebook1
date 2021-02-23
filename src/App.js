@@ -1,48 +1,24 @@
 import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
-// import ContactList from "./components/ContactList/ContactList";
+import ContactForm from "./components/ContactForm/ContactForm";
+import ContactList from "./components/ContactList/ContactList";
+import Filter from "./components/Filter/Filter";
 // import PropTypes from 'prop-types';
 
 class App extends Component {
-  // initialState = {
-  //   contacts: [
-  //     { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-  //     { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-  //     { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-  //     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-  //   ],
-  //   name: "",
-  //   number: "",
-  // };
   state = {
-    // contacts: [],
     contacts: [
       { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
       { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
       { id: "id-3", name: "Eden Clements", number: "645-17-79" },
       { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
     ],
-    name: "",
     filter: "",
-    number: "",
   };
 
   inputHandler = ({ target }) => {
     const { value, name } = target;
 
     this.setState({ [name]: value });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const singleContact = {
-      name: this.state.name,
-      number: this.state.number,
-      id: uuidv4(),
-    };
-    // console.log(singleContact);
-    this.addToPhonebook(singleContact);
-    // this.setState({ ...this.initialState });
   };
 
   addToPhonebook = (newContact) => {
@@ -73,58 +49,18 @@ class App extends Component {
     });
   };
   render() {
-    const { name, number, filter, contacts } = this.state;
+    const { filter } = this.state;
     const filteredContacts = this.filterContacts();
     return (
       <div>
         <h1>Phonebook</h1>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <input
-              onChange={this.inputHandler}
-              type="text"
-              name="name"
-              placeholder="Enter name..."
-              value={name}
-            ></input>
-          </label>
-          <label>
-            <input
-              onChange={this.inputHandler}
-              type="tel"
-              name="number"
-              placeholder="Enter number..."
-              value={number}
-            ></input>
-          </label>
-
-          <button type="submit">Add contact</button>
-        </form>
-        {/* <ContactForm  /> */}
-
+        <ContactForm addToPhonebook={this.addToPhonebook} />
         <h2>Contacts</h2>
-        <p>Fined contacts by name</p>
-        <label>
-          <input
-            onChange={this.inputHandler}
-            type="text"
-            name="filter"
-            placeholder="Enter name..."
-            value={filter}
-          />
-        </label>
-        <ul>
-          {filteredContacts.map((contact) => (
-            <li key={contact.id}>
-              {contact.name}:{contact.number}
-              <button onClick={() => this.deleteContact(contact.id)}>
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-        {/* <Filter />
-  <ContactList /> */}
+        <Filter filter={filter} inputHandler={this.inputHandler} />
+        <ContactList
+          filteredContacts={filteredContacts}
+          deleteContact={this.deleteContact}
+        />
       </div>
     );
   }

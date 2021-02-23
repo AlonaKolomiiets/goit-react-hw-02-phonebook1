@@ -1,29 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
+import ContactListItem from "./ContactListItem";
 // import PropTypes from 'prop-types';
 
-class ContactList extends Component {
-  state = {
-    contacts: [],
-  };
-
-  addToPhonebook = (item) => {
-    this.setState((prev) => ({
-      contacts: [...prev.contacts, item],
-    }));
-  };
-
-  render() {
-    return (
-      <div>
-        <ul>
-          {this.contacts.map((item) => (
-            <li key={item.id}>name</li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-}
+const ContactList = ({ filteredContacts, deleteContact }) => {
+  return (
+    <ul>
+      {filteredContacts.map((contact) => (
+        <ContactListItem
+          key={contact.id}
+          id={contact.id}
+          name={contact.name}
+          number={contact.number}
+          deleteContact={deleteContact}
+        />
+      ))}
+    </ul>
+  );
+};
 
 // ContactList.propTypes = {
 
