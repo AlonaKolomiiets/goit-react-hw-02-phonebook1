@@ -27,7 +27,7 @@ class App extends Component {
     number: "",
   };
 
-  inputHeandler = ({ target }) => {
+  inputHandler = ({ target }) => {
     const { value, name } = target;
 
     this.setState({ [name]: value });
@@ -40,7 +40,7 @@ class App extends Component {
       number: this.state.number,
       id: uuidv4(),
     };
-    console.log(singleContact);
+    // console.log(singleContact);
     this.addToPhonebook(singleContact);
     // this.setState({ ...this.initialState });
   };
@@ -55,11 +55,9 @@ class App extends Component {
         }));
   };
 
-  filterContacts = ({ target }) => {
-    const { value } = target;
-    // this.setState({ [name]: value });
+  filterContacts = () => {
     const { contacts, filter } = this.state;
-    const insensitiveValue = value.toLowerCase();
+    const insensitiveValue = filter.toLowerCase();
     if (filter.length) {
       return contacts.filter((contact) =>
         contact.name.toLowerCase().includes(insensitiveValue)
@@ -75,14 +73,15 @@ class App extends Component {
     });
   };
   render() {
-    const { name, number, filter } = this.state;
+    const { name, number, filter, contacts } = this.state;
+    const filteredContacts = this.filterContacts();
     return (
       <div>
         <h1>Phonebook</h1>
         <form onSubmit={this.handleSubmit}>
           <label>
             <input
-              onChange={this.inputHeandler}
+              onChange={this.inputHandler}
               type="text"
               name="name"
               placeholder="Enter name..."
@@ -91,7 +90,7 @@ class App extends Component {
           </label>
           <label>
             <input
-              onChange={this.inputHeandler}
+              onChange={this.inputHandler}
               type="tel"
               name="number"
               placeholder="Enter number..."
@@ -107,7 +106,7 @@ class App extends Component {
         <p>Fined contacts by name</p>
         <label>
           <input
-            onChange={this.filterContacts}
+            onChange={this.inputHandler}
             type="text"
             name="filter"
             placeholder="Enter name..."
@@ -115,14 +114,14 @@ class App extends Component {
           />
         </label>
         <ul>
-          {/* {this.filterContacts().map((contact) => (
+          {filteredContacts.map((contact) => (
             <li key={contact.id}>
               {contact.name}:{contact.number}
               <button onClick={() => this.deleteContact(contact.id)}>
                 Delete
               </button>
             </li>
-          ))} */}
+          ))}
         </ul>
         {/* <Filter />
   <ContactList /> */}
