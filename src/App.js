@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList";
 import Filter from "./components/Filter/Filter";
-// import PropTypes from 'prop-types';
+
 
 class App extends Component {
   state = {
@@ -66,8 +66,5 @@ class App extends Component {
   }
 }
 
-// App.propTypes = {
-
-// };
 
 export default App;

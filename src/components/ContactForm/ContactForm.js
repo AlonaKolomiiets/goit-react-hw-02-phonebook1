@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './ContactForm.module.css';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 class ContactForm extends Component {
   initialState = {
@@ -33,7 +33,7 @@ class ContactForm extends Component {
     const { name, number } = this.state;
     return (
       <>
-        <form  onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <label className={styles.contactFormLable}>
             <input
               onChange={this.inputHandler}
@@ -42,7 +42,7 @@ class ContactForm extends Component {
               placeholder="Enter name..."
               value={name}
             ></input>
-          </label >
+          </label>
           <label className={styles.contactFormLable}>
             <input
               onChange={this.inputHandler}
@@ -60,8 +60,8 @@ class ContactForm extends Component {
   }
 }
 
-// ContactForm.propTypes = {
-
-// };
+ContactForm.propTypes = {
+  addToPhonebook: PropTypes.func.isRequired,
+};
 
 export default ContactForm;
