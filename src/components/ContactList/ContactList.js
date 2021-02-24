@@ -19,7 +19,8 @@ const ContactList = ({ filteredContacts, deleteContact }) => {
 };
 
 ContactList.propTypes = {
-  filteredContacts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filteredContacts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+
   deleteContact: PropTypes.func.isRequired,
 };
 
