@@ -1,24 +1,24 @@
-import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import styles from './ContactForm.module.css';
 // import PropTypes from 'prop-types';
 
 class ContactForm extends Component {
   initialState = {
-    name: "",
-    number: "",
+    name: '',
+    number: '',
   };
   state = {
-    name: "",
-    number: "",
+    name: '',
+    number: '',
   };
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     const singleContact = {
       name: this.state.name,
       number: this.state.number,
       id: uuidv4(),
     };
-    // console.log(singleContact);
     this.props.addToPhonebook(singleContact);
     this.setState({ ...this.initialState });
   };
@@ -28,13 +28,13 @@ class ContactForm extends Component {
 
     this.setState({ [name]: value });
   };
-  
+
   render() {
     const { name, number } = this.state;
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
-          <label>
+        <form  onSubmit={this.handleSubmit}>
+          <label className={styles.contactFormLable}>
             <input
               onChange={this.inputHandler}
               type="text"
@@ -42,8 +42,8 @@ class ContactForm extends Component {
               placeholder="Enter name..."
               value={name}
             ></input>
-          </label>
-          <label>
+          </label >
+          <label className={styles.contactFormLable}>
             <input
               onChange={this.inputHandler}
               type="tel"
